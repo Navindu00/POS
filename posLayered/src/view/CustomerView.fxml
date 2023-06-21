@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerController">
+   <children>
+      <Label layoutX="265.0" layoutY="24.0" prefHeight="32.0" prefWidth="174.0" text="Customer" textFill="#6017c6">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCustID" layoutX="29.0" layoutY="94.0" prefHeight="25.0" prefWidth="91.0" promptText="Customer ID" />
+      <TextField fx:id="txtAddress" layoutX="29.0" layoutY="178.0" prefHeight="25.0" prefWidth="186.0" promptText="Address" />
+      <TextField fx:id="txtName" layoutX="29.0" layoutY="137.0" prefHeight="25.0" prefWidth="155.0" promptText="Name" />
+      <TextField fx:id="txtEmail" layoutX="29.0" layoutY="219.0" prefHeight="25.0" prefWidth="149.0" promptText="Email" />
+      <TextField fx:id="txtPostalCode" layoutX="29.0" layoutY="265.0" prefHeight="25.0" prefWidth="117.0" promptText="Postal Code" />
+      <TableView fx:id="tblCustomers" layoutX="227.0" layoutY="89.0" onMouseClicked="#tblOnMouseClicked" prefHeight="259.0" prefWidth="487.0">
+        <columns>
+          <TableColumn id="id" fx:id="colID" prefWidth="43.0" text="ID" />
+          <TableColumn id="name" fx:id="colName" prefWidth="96.0" text="Name" />
+            <TableColumn id="address" fx:id="colAddress" prefWidth="88.0" text="Address" />
+            <TableColumn id="email" fx:id="colEmail" prefWidth="114.0" text="Email" />
+            <TableColumn id="postalCode" fx:id="colPostalCode" prefWidth="73.0" text="Postal Code" />
+            <TableColumn id="btnDelete" fx:id="colDeleteButton" prefWidth="72.0" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnAdd" layoutX="169.0" layoutY="390.0" onAction="#btnAddOnAction" style="-fx-background-color: #2ecc71;" text="Add Customer" textFill="#fffbfb">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="423.0" layoutY="390.0" onAction="#btnUpdateOnAction" style="-fx-background-color: #3498db;" text="Update Customer" textFill="#f8f0f0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="13.0" />
+         </font></JFXButton>
+      <ImageView fitHeight="80.0" fitWidth="105.0" layoutX="582.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/139-1395688_customers-icon-customer-icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

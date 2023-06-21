@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderController">
+   <children>
+      <Label layoutX="293.0" layoutY="20.0" prefHeight="43.0" prefWidth="88.0" text="Order" textFill="#6017c6">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtOrderID" layoutX="52.0" layoutY="81.0" prefHeight="25.0" prefWidth="91.0" promptText="Order ID" />
+      <TextField fx:id="txtCustID" layoutX="52.0" layoutY="115.0" prefHeight="25.0" prefWidth="91.0" promptText="CustomerI D" />
+      <TextField fx:id="txtItemID" layoutX="52.0" layoutY="152.0" prefHeight="25.0" prefWidth="91.0" promptText="Item ID" />
+      <TextField fx:id="txtQuantity" layoutX="52.0" layoutY="187.0" prefHeight="25.0" prefWidth="91.0" promptText="Quantity" />
+      <JFXButton fx:id="btnCustSearch" layoutX="161.0" layoutY="115.0" onAction="#btnCustSearchOnAction" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: #2ecc71;" text="Search" textFill="#ebe1e1">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnItemSearch" layoutX="161.0" layoutY="152.0" onAction="#btnItemSearchOnAction" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: #2ecc71;" text="Search" textFill="#fcecec">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <TextField fx:id="txtCustData" editable="false" layoutX="230.0" layoutY="115.0" prefHeight="25.0" prefWidth="140.0" />
+      <TextField fx:id="txtItemData" editable="false" layoutX="230.0" layoutY="152.0" onAction="#btnItemSearchOnAction" prefHeight="25.0" prefWidth="370.0" />
+      <ImageView fitHeight="109.0" fitWidth="127.0" layoutX="545.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/vector-verified-cart-items-icon.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblOrder" layoutX="93.0" layoutY="229.0" prefHeight="200.0" prefWidth="506.0">
+        <columns>
+          <TableColumn id="id" fx:id="colItemID" editable="false" prefWidth="66.0" text="Item ID" />
+          <TableColumn id="name" fx:id="ColDescription" editable="false" prefWidth="131.0" text="Description" />
+            <TableColumn id="quantity" fx:id="colQuantity" editable="false" prefWidth="62.0" text="Quantity" />
+            <TableColumn id="unitPrice" fx:id="colUnitPrice" editable="false" prefWidth="91.0" text="Unit Price" />
+            <TableColumn id="subTotal" fx:id="colSubTotal" editable="false" prefWidth="83.0" text="Sub Total" />
+            <TableColumn id="btnRemove" fx:id="colBtnRemove" prefWidth="72.0" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnAdd" layoutX="570.0" layoutY="196.0" onAction="#btnAddOnAction" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #3498db;" text="Add to Cart" textFill="#f8f3f3">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <TextField fx:id="txtTotal" alignment="CENTER_RIGHT" editable="false" layoutX="591.0" layoutY="440.0" prefHeight="25.0" prefWidth="91.0" promptText="0.0" />
+      <Label fx:id="lblTotal" layoutX="545.0" layoutY="444.0" text="Total">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="txtPlaceOrder" layoutX="600.0" layoutY="481.0" onAction="#btnPlaceOnAction" style="-fx-background-color: #3498db;" text="Place Order" textFill="#f8f3f3">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+   </children>
+</AnchorPane>

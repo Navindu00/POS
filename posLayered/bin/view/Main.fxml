@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Label layoutX="215.0" layoutY="53.0" text="Thogakade" textFill="#bf25a8">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnCustomer" layoutX="92.0" layoutY="256.0" onAction="#btnCustomerOnAction" prefHeight="34.0" prefWidth="78.0" style="-fx-background-color: #2ecc71;" text="Customer" textFill="#f5eeee">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnItem" layoutX="261.0" layoutY="256.0" onAction="#btnItemOnAction" prefHeight="34.0" prefWidth="78.0" style="-fx-background-color: #2ecc71;" text="Item" textFill="#f5eeee">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnOrder" layoutX="438.0" layoutY="256.0" onAction="#btnOrderOnAction" prefHeight="34.0" prefWidth="78.0" style="-fx-background-color: #2ecc71;" text="Order" textFill="#f5eeee">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="117.0" fitWidth="151.0" layoutX="55.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/139-1395688_customers-icon-customer-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="81.0" fitWidth="102.0" layoutX="251.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/images.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="114.0" fitWidth="157.0" layoutX="408.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/vector-verified-cart-items-icon.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
