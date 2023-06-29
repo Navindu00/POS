@@ -8,7 +8,6 @@ public class OrderDTO {
     private Date orderDate;
     private int customerID;
     private double total;
-
     private ArrayList<OrderDetailDTO> detailDtos;
 
     public OrderDTO() {

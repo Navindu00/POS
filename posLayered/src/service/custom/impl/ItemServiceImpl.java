@@ -44,5 +44,17 @@ public class ItemServiceImpl implements ItemService{
 
         return dtoList;
     }
+
+    @Override
+    public ArrayList<ItemDTO> getAllItemsById() throws Exception {
+        ArrayList<Item> itemList = itemDao.getAllItemsByID();
+        ArrayList<ItemDTO> dtoList = new ArrayList<>();
+
+        for (Item item : itemList) {
+            dtoList.add(new ItemDTO(item.getId()));
+        }
+
+        return dtoList;
+    }
     
 }

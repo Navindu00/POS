@@ -14,7 +14,7 @@ public class ServiceFactory {
     }
 
     public enum serviceType{
-        CUSTOMER, ITEM, ORDER,
+        CUSTOMER, ITEM, ORDER, ORDER_DETAIL
     }
 
     public SuperService getService(serviceType type){

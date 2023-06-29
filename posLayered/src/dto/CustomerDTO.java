@@ -10,6 +10,10 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
+    public CustomerDTO(int id) {
+        this.id = id;
+    }
+
     public CustomerDTO(int id, String name, String address, String email, int postalCode) {
         this.id = id;
         this.name = name;

@@ -26,8 +26,6 @@ public class OrderServiceImpl implements OrderService{
     public boolean addOrder(OrderDTO orderDTO) throws Exception {
         Connection connection = DbConnection.getInstance().getConnection();
         connection.setAutoCommit(false);
-        
-   
 
         try {
             if(orderDao.add(new Order(orderDTO.getOrderID(), orderDTO.getOrderDate(), orderDTO.getCustomerID(), orderDTO.getTotal()))){

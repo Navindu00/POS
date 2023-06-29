@@ -8,6 +8,11 @@ public class ItemDTO {
     
     public ItemDTO() {
     }
+    
+
+    public ItemDTO(int id) {
+        this.id = id;
+    }
 
     public ItemDTO(int id, String name, double unitPrice, int quantity) {
         this.id = id;

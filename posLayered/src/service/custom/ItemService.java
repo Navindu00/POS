@@ -11,4 +11,5 @@ public interface ItemService extends SuperService{
     public boolean deleteItem(Integer id) throws Exception;
     public ItemDTO getItem(Integer id) throws Exception;
     public ArrayList<ItemDTO> getAllItems() throws Exception;
+    public ArrayList<ItemDTO> getAllItemsById() throws Exception;
 }
