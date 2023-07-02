@@ -14,6 +14,11 @@ public class Item implements SuperEntity {
     }
 
 
+    public Item(int id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
     public Item(int id, String name, double unitPrice, int quantity) {
         this.id = id;
         this.name = name;

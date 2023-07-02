@@ -34,7 +34,6 @@ public class OrderController {
     private CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.CUSTOMER);
     private ItemService itemService = (ItemService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ITEM);
     private OrderService orderService = (OrderService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ORDER);
-    private ArrayList<OrderDetailDTO> detailDtos = new ArrayList<>();
     private ItemDTO tempItem;
     private double total = 0.0;
 
@@ -148,7 +147,17 @@ public class OrderController {
 
     @FXML
     void btnPlaceOnAction(ActionEvent event) {
-        
+        try {
+            boolean isOrderAdded = orderService.addOrder(getOrder(), getOrderDetails());
+            clearAfterPlace();
+            if(isOrderAdded){
+                new Alert(AlertType.CONFIRMATION, "Order is Saved!").show();
+            }else{
+                new Alert(AlertType.ERROR, "order is not Saved!").show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadAllCustomerId() {

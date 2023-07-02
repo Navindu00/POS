@@ -60,14 +60,18 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public boolean updateItemWhenOrder(ArrayList<OrderDetailDTO> orderDetailDTOs) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateItemWhenOrder'");
+        for (OrderDetailDTO orderDetailDTO : orderDetailDTOs) {
+            boolean isItemUpdated = updateItemWhenOrder(orderDetailDTO);
+            if(!isItemUpdated){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean updateItemWhenOrder(OrderDetailDTO orderDetailDTO) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateItemWhenOrder'");
+        return itemDao.updateItemWhenOrder(new Item(orderDetailDTO.getItemID(), orderDetailDTO.getQuantity()));
     }
     
 }

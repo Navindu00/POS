@@ -54,5 +54,10 @@ public class ItemDAOImpl implements ItemDAO{
         }
         return itemList;
     }
+
+    @Override
+    public boolean updateItemWhenOrder(Item item) throws Exception {
+        return CrudUtil.execute("UPDATE item SET quantity=quantity-? WHERE item_id=?", item.getQuantity(), item.getId());
+    }
     
 }
