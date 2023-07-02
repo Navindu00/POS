@@ -1,30 +1,22 @@
 package dto;
 
 public class OrderDetailDTO {
-    private int id;
     private double unitPrice;
     private int quantity;
     private int itemID;
-    private String name;
+    private int orderID;
     
     public OrderDetailDTO() {
     }
     
-    public OrderDetailDTO(int id, double unitPrice, int quantity, int itemID, String name) {
-        this.id = id;
+
+    public OrderDetailDTO(double unitPrice, int quantity, int itemID, int orderID) {
         this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.itemID = itemID;
-        this.name = name;
+        this.orderID = orderID;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public double getUnitPrice() {
         return unitPrice;
@@ -50,19 +42,27 @@ public class OrderDetailDTO {
         this.itemID = itemID;
     }
 
-    public String getName() {
-        return name;
+
+    public int getOrderID() {
+        return orderID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
+
 
     @Override
     public String toString() {
-        return "OrderDetailDTO [id=" + id + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", itemID=" + itemID
-                + ", name=" + name + "]";
+        return "OrderDetailDTO [unitPrice=" + unitPrice + ", quantity=" + quantity + ", itemID=" + itemID + ", orderID="
+                + orderID + "]";
     }
+
+
+    
+
+    
 
     
 

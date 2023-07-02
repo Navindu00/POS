@@ -1,7 +1,6 @@
 package entity;
 
 public class OrderDetail implements SuperEntity{
-    private int id;
     private double unitPrice;
     private int quantity;
     private int orderID;
@@ -10,20 +9,11 @@ public class OrderDetail implements SuperEntity{
     public OrderDetail() {
     }
 
-    public OrderDetail(int id, double unitPrice, int quantity, int orderID, int itemID) {
-        this.id = id;
+    public OrderDetail(double unitPrice, int quantity, int orderID, int itemID) {
         this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.orderID = orderID;
         this.itemID = itemID;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public double getUnitPrice() {
@@ -60,9 +50,11 @@ public class OrderDetail implements SuperEntity{
 
     @Override
     public String toString() {
-        return "OrderDetail [id=" + id + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", orderID=" + orderID
-                + ", itemID=" + itemID + "]";
+        return "OrderDetail [unitPrice=" + unitPrice + ", quantity=" + quantity + ", orderID=" + orderID + ", itemID="
+                + itemID + "]";
     }
+
+    
     
     
     

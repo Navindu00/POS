@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dao.DaoFactory;
 import dao.custom.ItemDAO;
 import dto.ItemDTO;
+import dto.OrderDetailDTO;
 import entity.Item;
 import service.custom.ItemService;
 
@@ -43,6 +44,22 @@ public class ItemServiceImpl implements ItemService{
         }
 
         return dtoList;
+    }
+
+    @Override
+    public boolean updateItemWhenOrder(ArrayList<OrderDetailDTO> detailDTOs) throws Exception {
+        for (OrderDetailDTO orderDetailDTO : detailDTOs) {
+            boolean isItemUpdated = updateItemWhenOrder(orderDetailDTO);
+            if(!isItemUpdated){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateItemWhenOrder(OrderDetailDTO detailDTO) throws Exception {
+        return itemDao.updateItemWhenOrder(new Item(detailDTO.getItemID(), detailDTO.getQuantity()));
     }
     
 }

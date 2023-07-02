@@ -1,6 +1,5 @@
 package dto;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class OrderDTO {
@@ -9,17 +8,15 @@ public class OrderDTO {
     private int customerID;
     private double total;
 
-    private ArrayList<OrderDetailDTO> detailDtos;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(int orderID, Date orderDate, int customerID, double total, ArrayList<OrderDetailDTO> detailDtos) {
+    public OrderDTO(int orderID, Date orderDate, int customerID, double total) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.customerID = customerID;
         this.total = total;
-        this.detailDtos = detailDtos;
     }
 
     public int getOrderID() {
@@ -52,17 +49,6 @@ public class OrderDTO {
 
     public void setTotal(double total) {
         this.total = total;
-    }
-
-    public ArrayList<OrderDetailDTO> getDetailDtos() {
-        return detailDtos;
-    }
-
-    public void setDetailDtos(ArrayList<OrderDetailDTO> detailDtos) {
-        this.detailDtos = detailDtos;
-    }
-    
-    
-    
+    } 
     
 }

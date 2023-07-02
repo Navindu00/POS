@@ -33,7 +33,7 @@ public class OrderController {
     private CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.CUSTOMER);
     private ItemService itemService = (ItemService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ITEM);
     private OrderService orderService = (OrderService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ORDER);
-    private ArrayList<OrderDetailDTO> detailDtos = new ArrayList<>();
+    //private ArrayList<OrderDetailDTO> detailDtos = new ArrayList<>();
     private ItemDTO tempItem;
     private double total = 0.0;
 
@@ -140,6 +140,7 @@ public class OrderController {
         colBtnRemove.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
 
         try{
+            //int orderID = Integer.parseInt(txtOrderID.getText());
             int itemID = tempItem.getId();
             String description = tempItem.getName();
             int quantity = Integer.parseInt(txtQuantity.getText());
@@ -147,8 +148,6 @@ public class OrderController {
             double subTotal = quantity * unitPrice;
             total += subTotal;
             
-            OrderDetailDTO odDto = new OrderDetailDTO(-1, unitPrice, quantity, itemID, description);
-            detailDtos.add(odDto);
 
             Button btnRemove = new Button("Remove");
             btnRemove.setMaxSize(60, 60);
@@ -168,19 +167,33 @@ public class OrderController {
     @FXML
     void btnPlaceOnAction(ActionEvent event) {
         try {
-            int orderID = Integer.parseInt(txtOrderID.getText());
-            Date orderdate = new Date();
-            int custId = Integer.parseInt(txtCustID.getText());
-
-            boolean isOrderAdded = orderService.addOrder(new OrderDTO(orderID, orderdate, custId, total, detailDtos));
-            if(isOrderAdded){
+            boolean isAdded = orderService.addOrder(getOrder(), getOrderDetails());
+            if(isAdded){
                 new Alert(AlertType.CONFIRMATION, "Order is Saved!").show();
             }else{
-                new Alert(AlertType.CONFIRMATION, "ERROR!").show();
+                new Alert(AlertType.ERROR, "Order is not Saved!").show();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public OrderDTO getOrder(){
+        int orderId = Integer.parseInt(txtOrderID.getText());
+        Date orderDate = new Date();
+        int custId = Integer.parseInt(txtCustID.getText());
+        return new OrderDTO(orderId, orderDate, custId, total);
+    }
+
+    public ArrayList<OrderDetailDTO> getOrderDetails(){
+        int orderId = Integer.parseInt(txtOrderID.getText());
+
+        ArrayList<OrderDetailDTO> orderDetailDTOs = new ArrayList<>();
+        for(int i=0; i<tblOrder.getItems().size(); i++){
+            OrderTM orderTM = tmList.get(i);
+            orderDetailDTOs.add(new OrderDetailDTO(orderTM.getUnitPrice(), orderTM.getQuantity(), orderTM.getId(), orderId));
+        }
+        return orderDetailDTOs;
     }
 
     private void clearAfterAddToCart(){

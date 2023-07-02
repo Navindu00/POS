@@ -16,7 +16,7 @@
             "name": "App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "posLayered_6f73d0fa",
+            "projectName": "POS_d6a822b3",
             "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-17.0.7/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]

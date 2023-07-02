@@ -2,6 +2,7 @@ package service;
 
 import service.custom.impl.CustomerServiceImpl;
 import service.custom.impl.ItemServiceImpl;
+import service.custom.impl.OrderDetailServiceImpl;
 import service.custom.impl.OrderServiceImpl;
 
 public class ServiceFactory {
@@ -14,7 +15,7 @@ public class ServiceFactory {
     }
 
     public enum serviceType{
-        CUSTOMER, ITEM, ORDER,
+        CUSTOMER, ITEM, ORDER, ORDER_DETAIL
     }
 
     public SuperService getService(serviceType type){
@@ -25,6 +26,8 @@ public class ServiceFactory {
                 return new ItemServiceImpl();
             case ORDER:
                 return new OrderServiceImpl();
+            case ORDER_DETAIL:
+                return new OrderDetailServiceImpl();
             default:
                 return null;
         }
