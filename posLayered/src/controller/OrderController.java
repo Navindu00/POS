@@ -121,25 +121,19 @@ public class OrderController {
         colBtnRemove.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
 
         try{
-            int itemID = tempItem.getId();
+            int itemId = tempItem.getId();
             String description = tempItem.getName();
             Double unitPrice = tempItem.getUnitPrice();
             Integer quantity = Integer.parseInt(txtQuantity.getText());
             Double subTotal = unitPrice * quantity;
             total += subTotal;
             
-            OrderDetailDTO odDto = new OrderDetailDTO(-1, unitPrice, quantity, itemID, description);
-            detailDtos.add(odDto);
-
             Button btnRemove = new Button("Remove");
 
             btnRemove.setMaxSize(60, 60);
             btnRemove.setCursor(Cursor.HAND);
             btnRemove.setStyle("-fx-background-color:#e74c3c");
             btnRemove.setTextFill(Color.web("#ecf0f1"));
-
-            OrderDetailDTO detailDTO = new OrderDetailDTO(-1, unitPrice, quantity, itemId, description);
-            detailDtos.add(detailDTO);
 
             txtTotal.setText(Double.toString(total));
             tmList.add(new OrderTM(itemId, description, unitPrice, quantity, subTotal, btnRemove));
@@ -154,21 +148,7 @@ public class OrderController {
 
     @FXML
     void btnPlaceOnAction(ActionEvent event) {
-        try {
-            int orderID = Integer.parseInt(txtOrderID.getText());
-            Date orderdate = new Date();
-            int custId = Integer.parseInt(txtCustID.getText());
-
-            boolean isOrderAdded = orderService.addOrder(new OrderDTO(orderID, orderdate, custId, total, detailDtos));
-            if(isOrderAdded){
-                new Alert(AlertType.CONFIRMATION, "Order is Saved!").show();
-            }else{
-                new Alert(AlertType.ERROR, "Order is not Saved!").show();
-            }
-            clearAfterPlace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
     }
 
     public void loadAllCustomerId() {
@@ -238,7 +218,7 @@ public class OrderController {
     public OrderDTO getOrder(){
         int orderId = Integer.parseInt(txtOrderID.getText());
         Date orderDate = new Date();
-        int custId = Integer.parseInt(txtCustID.getText());
+        int custId = cmbCustID.getValue();
         return new OrderDTO(orderId, orderDate, custId, total);
     }
 
@@ -269,68 +249,4 @@ public class OrderController {
         txtTotal.setText("0.0");
     }
 
-
-    // ObservableList<OrderTM> tmList = FXCollections.observableArrayList();
-
-    // @FXML
-    // void btnAddOnAction(ActionEvent event) {
-    // colItemID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    // ColDescription.setCellValueFactory(new PropertyValueFactory<>("name"));
-    // colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-    // colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-    // colSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
-    // colBtnRemove.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
-
-    // try{
-    // int itemID = tempItem.getId();
-    // String description = tempItem.getName();
-    // int quantity = Integer.parseInt(txtQuantity.getText());
-    // double unitPrice = tempItem.getUnitPrice();
-    // double subTotal = quantity * unitPrice;
-    // total += subTotal;
-
-    // OrderDetailDTO odDto = new OrderDetailDTO(-1, unitPrice, quantity, itemID,
-    // description);
-    // detailDtos.add(odDto);
-
-    // Button btnRemove = new Button("Remove");
-    // btnRemove.setMaxSize(60, 60);
-    // btnRemove.setCursor(Cursor.HAND);
-    // btnRemove.setStyle("-fx-background-color:#e74c3c");
-    // btnRemove.setTextFill(Color.web("#ecf0f1"));
-
-    // tmList.add(new OrderTM(itemID, description, unitPrice, quantity, subTotal,
-    // btnRemove));
-    // tblOrder.setItems(tmList);
-    // txtTotal.setText(Double.toString(total));
-    // clearAfterAddToCart();
-    // }catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-    // @FXML
-    // void btnPlaceOnAction(ActionEvent event) {
-    // try {
-    // int orderID = Integer.parseInt(txtOrderID.getText());
-    // Date orderdate = new Date();
-    // int custId = Integer.parseInt(txtCustID.getText());
-
-    // boolean isOrderAdded = orderService.addOrder(new OrderDTO(orderID, orderdate,
-    // custId, total, detailDtos));
-    // if(isOrderAdded){
-    // new Alert(AlertType.CONFIRMATION, "Order is Saved!").show();
-    // }else{
-    // new Alert(AlertType.CONFIRMATION, "ERROR!").show();
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-    // private void clearAfterAddToCart(){
-    // txtItemID.setText("");
-    // txtItemData.setText("");
-    // txtQuantity.setText("");
-    // }
 }
