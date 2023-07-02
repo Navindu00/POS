@@ -22,10 +22,7 @@ import service.custom.OrderService;
 public class OrderServiceImpl implements OrderService {
 
     OrderDAO orderDao = (OrderDAO) DaoFactory.getInstance().getDao(DaoFactory.DAOType.ORDER);
-    // OrderDetailDAO orderDetailDao =
-    // (OrderDetailDAO)DaoFactory.getInstance().getDao(DaoFactory.DAOType.ORDER_DETAIL);
-    // ItemDAO itemDAO =
-    // (ItemDAO)DaoFactory.getInstance().getDao(DaoFactory.DAOType.ITEM);
+
     OrderDetailService orderDetailService = (OrderDetailService) ServiceFactory.getInstance()
             .getService(serviceType.ORDER_DETAIL);
     ItemService itemService = (ItemService) ServiceFactory.getInstance().getService(serviceType.ITEM);

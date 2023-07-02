@@ -43,5 +43,16 @@ public class ItemDAOImpl implements ItemDAO{
         }
         return itemList;
     }
+
+    @Override
+    public ArrayList<Item> getAllItemsByID() throws Exception {
+        ResultSet itemIdSet = CrudUtil.execute("SELECT item_id FROM item");
+        ArrayList<Item> itemList = new ArrayList<>();
+
+        while(itemIdSet.next()){
+            itemList.add(new Item(itemIdSet.getInt(1)));
+        }
+        return itemList;
+    }
     
 }
