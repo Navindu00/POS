@@ -11,4 +11,6 @@ public interface CustomerService extends SuperService {
     public boolean deleteCustomer(Integer id) throws Exception;
     public CustomerDTO getCustomer(Integer id) throws Exception;
     public ArrayList<CustomerDTO> getAllCustomers() throws Exception;
+    public ArrayList<CustomerDTO> getAllCustomersById() throws Exception;
+    
 }

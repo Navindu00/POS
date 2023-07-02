@@ -10,6 +10,10 @@ public class Customer implements SuperEntity{
     public Customer() {
     }
 
+    public Customer(int id) {
+        this.id = id;
+    }
+
     public Customer(int id, String name, String address, String email, int postalCode) {
         this.id = id;
         this.name = name;

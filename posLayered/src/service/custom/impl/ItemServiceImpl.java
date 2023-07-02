@@ -45,21 +45,5 @@ public class ItemServiceImpl implements ItemService{
 
         return dtoList;
     }
-
-    @Override
-    public boolean updateItemWhenOrder(ArrayList<OrderDetailDTO> detailDTOs) throws Exception {
-        for (OrderDetailDTO orderDetailDTO : detailDTOs) {
-            boolean isItemUpdated = updateItemWhenOrder(orderDetailDTO);
-            if(!isItemUpdated){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean updateItemWhenOrder(OrderDetailDTO detailDTO) throws Exception {
-        return itemDao.updateItemWhenOrder(new Item(detailDTO.getItemID(), detailDTO.getQuantity()));
-    }
     
 }

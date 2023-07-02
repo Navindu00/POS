@@ -2,8 +2,6 @@ package view.tm;
 
 import javafx.scene.control.Button;
 
-import javafx.scene.control.Button;
-
 public class CustomerTM {
     private int id;
     private String name;

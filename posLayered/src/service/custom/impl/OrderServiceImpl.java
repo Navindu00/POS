@@ -33,6 +33,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean addOrder(OrderDTO orderDTO, ArrayList<OrderDetailDTO> detailDTOs) throws Exception {
         Connection connection = DbConnection.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        
+   
+
         try {
             connection.setAutoCommit(false);
             boolean isOrderSaved = orderDao.add(new Order(orderDTO.getOrderID(), orderDTO.getOrderDate(),
