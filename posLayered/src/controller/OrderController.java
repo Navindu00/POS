@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -16,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -23,17 +26,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import service.ServiceFactory;
 import service.custom.CustomerService;
 import service.custom.ItemService;
 import service.custom.OrderService;
+import util.Validator;
 import view.tm.OrderTM;
 
 public class OrderController {
     private CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.CUSTOMER);
-    private ItemService itemService = (ItemService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ITEM);
-    private OrderService orderService = (OrderService)ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ORDER);
+    private ItemService itemService = (ItemService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ITEM);
+    private OrderService orderService = (OrderService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.ORDER);
     private ItemDTO tempItem;
     private double total = 0.0;
 
@@ -92,7 +98,7 @@ public class OrderController {
     private TableView<OrderTM> tblOrder;
 
     @FXML
-    private JFXButton txtPlaceOrder;
+    private JFXButton btnPlaceOrder;
 
     @FXML
     private TextField txtQuantity;
@@ -119,14 +125,14 @@ public class OrderController {
         colSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
         colBtnRemove.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
 
-        try{
+        try {
             int itemId = tempItem.getId();
             String description = tempItem.getName();
             Double unitPrice = tempItem.getUnitPrice();
             Integer quantity = Integer.parseInt(txtQuantity.getText());
-            Double subTotal = unitPrice * quantity;
-            total += subTotal;
+            Double subTotal = quantity * unitPrice;
             
+
             Button btnRemove = new Button("Remove");
 
             btnRemove.setMaxSize(60, 60);
@@ -134,15 +140,54 @@ public class OrderController {
             btnRemove.setStyle("-fx-background-color:#e74c3c");
             btnRemove.setTextFill(Color.web("#ecf0f1"));
 
-            txtTotal.setText(Double.toString(total));
-            tmList.add(new OrderTM(itemId, description, unitPrice, quantity, subTotal, btnRemove));
+            if (!tmList.isEmpty()) {
+                for (int i = 0; i < tblOrder.getItems().size(); i++) {
+                    if (colItemID.getCellData(i).equals(itemId)) {
+                        int tempQty = colQuantity.getCellData(i);
+                        tempQty += quantity;
+
+                        if(tempQty <= Integer.parseInt(lblQoh.getText())){
+                            subTotal = tempQty * unitPrice;
+                            tmList.get(i).setQuantity(tempQty);
+                            tmList.get(i).setSubTotal(subTotal);
+                            tblOrder.refresh();
+                            clearAfterAddToCart();
+                            setTotal();
+                            return;
+                        }
+                    }
+                }
+            }
+            
+            OrderTM orderTM = new OrderTM(itemId, description, unitPrice, quantity, subTotal, btnRemove);
+            tmList.add(orderTM);
+
+            btnRemove.setOnAction((e) -> {
+                    ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure?", yes, no);
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    try {
+                        if (result.orElse(no) == yes) {
+                            tmList.remove(orderTM);
+                            setTotal();
+                            tblOrder.refresh();
+
+                        }
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                });
+
             tblOrder.setItems(tmList);
+            setTotal();
             clearAfterAddToCart();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        
     }
 
     @FXML
@@ -150,9 +195,9 @@ public class OrderController {
         try {
             boolean isOrderAdded = orderService.addOrder(getOrder(), getOrderDetails());
             clearAfterPlace();
-            if(isOrderAdded){
+            if (isOrderAdded) {
                 new Alert(AlertType.CONFIRMATION, "Order is Saved!").show();
-            }else{
+            } else {
                 new Alert(AlertType.ERROR, "order is not Saved!").show();
             }
         } catch (Exception e) {
@@ -213,7 +258,7 @@ public class OrderController {
             Integer itemId = cmbItemID.getValue();
             ItemDTO itemDTO = itemService.getItem(itemId);
 
-            if(itemDTO != null){
+            if (itemDTO != null) {
                 tempItem = itemDTO;
                 lblItemName.setText(itemDTO.getName());
                 lblQoh.setText(Integer.toString(itemDTO.getQuantity()));
@@ -224,38 +269,61 @@ public class OrderController {
         }
     }
 
-    public OrderDTO getOrder(){
+    public OrderDTO getOrder() {
         int orderId = Integer.parseInt(txtOrderID.getText());
         Date orderDate = new Date();
         int custId = cmbCustID.getValue();
         return new OrderDTO(orderId, orderDate, custId, total);
     }
 
-    public ArrayList<OrderDetailDTO> getOrderDetails(){
+    public ArrayList<OrderDetailDTO> getOrderDetails() {
         int orderId = Integer.parseInt(txtOrderID.getText());
 
         ArrayList<OrderDetailDTO> orderDetailDTOs = new ArrayList<>();
-        for(int i=0; i<tblOrder.getItems().size(); i++){
+        for (int i = 0; i < tblOrder.getItems().size(); i++) {
             OrderTM orderTM = tmList.get(i);
-            orderDetailDTOs.add(new OrderDetailDTO(orderTM.getUnitPrice(), orderTM.getQuantity(), orderTM.getId(), orderId));
+            orderDetailDTOs
+                    .add(new OrderDetailDTO(orderTM.getUnitPrice(), orderTM.getQuantity(), orderTM.getId(), orderId));
         }
         return orderDetailDTOs;
     }
 
-    private void clearAfterAddToCart(){
+    private void clearAfterAddToCart() {
         txtQuantity.setText("");
-        lblItemName.setText("");
-        lblQoh.setText("");
-        lblUnitPrice.setText("");
-        //cmbItemID.setValue(null);
     }
 
-    private void clearAfterPlace(){
+    private void clearAfterPlace() {
         txtOrderID.setText("");
         lblCustName.setText("");
         lblCustAddress.setText("");
         total = 0.0;
         txtTotal.setText("0.0");
+    }
+
+    private void setTotal(){
+        double total = 0.0;
+        for (OrderTM orderTM : tmList) {
+            total += orderTM.getSubTotal();
+        }
+        txtTotal.setText(Double.toString(total));
+    }
+
+    @FXML
+    void txtIdOnKeyRelease(KeyEvent event) {
+        if(Validator.validateTextField(txtOrderID, "^[0-9]{1,}$")){
+            txtOrderID.setStyle("-fx-focus-color:#3498db");
+        }else{
+            txtOrderID.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtQuantityOnKeyRelease(KeyEvent event) {
+        if(Validator.validateTextField(txtQuantity, "^[0-9]{1,}$")){
+            txtQuantity.setStyle("-fx-focus-color:#3498db");
+        }else{
+            txtQuantity.setStyle("-fx-focus-color:red");
+        }
     }
 
 }

@@ -18,11 +18,11 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
-      <TextField fx:id="txtCustID" layoutX="29.0" layoutY="94.0" prefHeight="25.0" prefWidth="91.0" promptText="Customer ID" />
-      <TextField fx:id="txtAddress" layoutX="29.0" layoutY="178.0" prefHeight="25.0" prefWidth="186.0" promptText="Address" />
-      <TextField fx:id="txtName" layoutX="29.0" layoutY="137.0" prefHeight="25.0" prefWidth="155.0" promptText="Name" />
-      <TextField fx:id="txtEmail" layoutX="29.0" layoutY="219.0" prefHeight="25.0" prefWidth="149.0" promptText="Email" />
-      <TextField fx:id="txtPostalCode" layoutX="29.0" layoutY="265.0" prefHeight="25.0" prefWidth="117.0" promptText="Postal Code" />
+      <TextField fx:id="txtCustID" layoutX="29.0" layoutY="94.0" onKeyReleased="#txtIdOnKeyReleased" prefHeight="25.0" prefWidth="91.0" promptText="Customer ID" />
+      <TextField fx:id="txtAddress" layoutX="29.0" layoutY="178.0" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="25.0" prefWidth="186.0" promptText="Address" />
+      <TextField fx:id="txtName" layoutX="29.0" layoutY="137.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="25.0" prefWidth="155.0" promptText="Name" />
+      <TextField fx:id="txtEmail" layoutX="29.0" layoutY="219.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="25.0" prefWidth="149.0" promptText="Email" />
+      <TextField fx:id="txtPostalCode" layoutX="29.0" layoutY="265.0" onKeyReleased="#txtPostalOnKeyReleased" prefHeight="25.0" prefWidth="117.0" promptText="Postal Code" />
       <TableView fx:id="tblCustomers" layoutX="227.0" layoutY="89.0" onMouseClicked="#tblOnMouseClicked" prefHeight="259.0" prefWidth="487.0">
         <columns>
           <TableColumn id="id" fx:id="colID" prefWidth="43.0" text="ID" />

@@ -20,6 +20,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.control.TableColumn;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import service.ServiceFactory;
 import service.custom.ItemService;
+import util.Validator;
 import view.tm.ItemTM;
 
 public class ItemController {
@@ -195,5 +198,50 @@ public class ItemController {
         txtName.setText("");
         txtUnitPrice.setText("");
         txtQuantity.setText("");
+    }
+
+    @FXML
+    void txtIdOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtItemID, "^[0-9]{1,}$")){
+            txtItemID.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtName.requestFocus();
+            }
+        }else{
+            txtItemID.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtNameOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtName, "^[A-z| ]{1,}$|^[A-z| ]{1,} [0-9]{1,}[A-z]{1,5}$")){
+            txtName.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtUnitPrice.requestFocus();
+            }
+        }else{
+            txtName.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtQuantityOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtQuantity, "^[0-9]{1,}$")){
+            txtQuantity.setStyle("-fx-focus-color:#3498db");
+        }else{
+            txtQuantity.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtUnitPriceOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtUnitPrice, "^[0-9]{1,}$|^[0-9]{1,}.[0-9]{1,}$")){
+            txtUnitPrice.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtQuantity.requestFocus();
+            }
+        }else{
+            txtUnitPrice.setStyle("-fx-focus-color:red");
+        }
     }
 }

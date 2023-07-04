@@ -19,10 +19,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import service.ServiceFactory;
 import service.custom.CustomerService;
+import util.Validator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import view.tm.CustomerTM;
@@ -213,6 +216,63 @@ public class CustomerController {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    void txtAddressOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtAddress, "^[A-z| ]{1,}$")){
+            txtAddress.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtEmail.requestFocus();
+            }
+        }else{
+            txtAddress.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtEmailOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtEmail, "^[a-z|0-9]{1,}@[a-z]{1,}.com")){
+            txtEmail.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtPostalCode.requestFocus();
+            }
+        }else{
+            txtEmail.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtIdOnKeyReleased(KeyEvent event) { 
+        if(Validator.validateTextField(txtCustID, "^[0-9]{1,}$")){
+            txtCustID.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtName.requestFocus();
+            }
+        }else{
+            txtCustID.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtNameOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtName, "^[A-z| ]{1,}$")){
+            txtName.setStyle("-fx-focus-color:#3498db");
+            if(event.getCode() == KeyCode.ENTER){
+                txtAddress.requestFocus();
+            }
+        }else{
+            txtName.setStyle("-fx-focus-color:red");
+        }
+    }
+
+    @FXML
+    void txtPostalOnKeyReleased(KeyEvent event) {
+        if(Validator.validateTextField(txtPostalCode, "^[0-9]{1,}$")){
+            txtPostalCode.setStyle("-fx-focus-color:#3498db");
+        }else{
+            txtPostalCode.setStyle("-fx-focus-color:red");
+        }
     }
 
 }

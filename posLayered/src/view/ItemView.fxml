@@ -18,10 +18,10 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
-      <TextField fx:id="txtItemID" layoutX="39.0" layoutY="121.0" prefHeight="25.0" prefWidth="91.0" promptText="Item ID" />
-      <TextField fx:id="txtName" layoutX="39.0" layoutY="155.0" prefHeight="25.0" prefWidth="121.0" promptText="Name" />
-      <TextField fx:id="txtUnitPrice" alignment="TOP_RIGHT" layoutX="39.0" layoutY="193.0" prefHeight="25.0" prefWidth="99.0" promptText="Unit Price" />
-      <TextField fx:id="txtQuantity" alignment="CENTER_RIGHT" layoutX="39.0" layoutY="232.0" prefHeight="25.0" prefWidth="91.0" promptText="Quantity" />
+      <TextField fx:id="txtItemID" layoutX="39.0" layoutY="121.0" onKeyReleased="#txtIdOnKeyReleased" prefHeight="25.0" prefWidth="91.0" promptText="Item ID" />
+      <TextField fx:id="txtName" layoutX="39.0" layoutY="155.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="25.0" prefWidth="121.0" promptText="Name" />
+      <TextField fx:id="txtUnitPrice" alignment="TOP_RIGHT" layoutX="39.0" layoutY="193.0" onKeyReleased="#txtUnitPriceOnKeyReleased" prefHeight="25.0" prefWidth="99.0" promptText="Unit Price" />
+      <TextField fx:id="txtQuantity" alignment="CENTER_RIGHT" layoutX="39.0" layoutY="232.0" onKeyReleased="#txtQuantityOnKeyReleased" prefHeight="25.0" prefWidth="91.0" promptText="Quantity" />
       <TableView fx:id="tblItems" layoutX="203.0" layoutY="106.0" onMouseClicked="#tblOnMouseClicked" prefHeight="200.0" prefWidth="455.0">
         <columns>
           <TableColumn id="id" fx:id="colID" prefWidth="82.0" text="ID" />

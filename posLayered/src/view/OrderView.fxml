@@ -44,7 +44,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="txtPlaceOrder" layoutX="608.0" layoutY="521.0" onAction="#btnPlaceOnAction" style="-fx-background-color: #3498db;" text="Place Order" textFill="#f8f3f3">
+      <JFXButton fx:id="btnPlaceOrder" layoutX="608.0" layoutY="521.0" onAction="#btnPlaceOnAction" style="-fx-background-color: #3498db;" text="Place Order" textFill="#f8f3f3">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
@@ -113,12 +113,12 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtQuantity" layoutX="256.0" layoutY="230.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="107.0" promptText="Quantity" />
+      <TextField fx:id="txtQuantity" layoutX="256.0" layoutY="230.0" nodeOrientation="RIGHT_TO_LEFT" onKeyReleased="#txtQuantityOnKeyRelease" prefHeight="25.0" prefWidth="107.0" promptText="Quantity" />
       <Label fx:id="lblOrderID" layoutX="36.0" layoutY="111.0" prefHeight="19.0" prefWidth="71.0" text="Order ID :">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtOrderID" layoutX="18.0" layoutY="144.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="107.0" promptText="Order ID" />
+      <TextField fx:id="txtOrderID" layoutX="18.0" layoutY="144.0" nodeOrientation="LEFT_TO_RIGHT" onKeyReleased="#txtIdOnKeyRelease" prefHeight="25.0" prefWidth="107.0" promptText="Order ID" />
    </children>
 </AnchorPane>
